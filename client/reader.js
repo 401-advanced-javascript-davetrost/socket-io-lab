@@ -23,4 +23,3 @@ reader
   });
 
 reader.parse(process.argv);
-
