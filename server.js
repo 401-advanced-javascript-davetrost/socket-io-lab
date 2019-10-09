@@ -1,17 +1,21 @@
-require('dotenv').config();
-const io = require('socket.io')(process.env.SOCKETIO_PORT);
+const io = require('socket.io')(7890);
 
 io.on('connection', socket => {
   socket.on('file-read', data => {
-    socket.emit('log', '[server]state=file-read > received data: ' + data);
-    socket.emit('capitalize-file');
+    console.log('received message with', data);
+    
+    io.emit('log', '[server]state=file-read > received data: ');
+    io.emit('capitalize-file', data);
   });
   socket.on('file-write', data => {
-    socket.emit('log', '[server]state=file-write > received data: ' + data);
-    socket.emit('save-file');
+    io.emit('log', '[server]state=file-write > received data: ' + data);
+    io.emit('save-file');
   });
   socket.on('file-saved', data => {
-    socket.emit('log', '[server]state=file-saved > received data: ' + data);
+    io.emit('log', '[server]state=file-saved > received data: ' + data);
+  });
+  socket.on('file-error', error => {
+    console.log('Error: ' + error);
   });
 });
 
