@@ -6,7 +6,7 @@ const writeFileAsync = require('../lib/write-file-async');
 socket.on('save-file', ({ filenameToWrite, capitalizedContent }) => {
   writeFileAsync(filenameToWrite, capitalizedContent)
     .then(data => {
-      socket.emit('file-saved', data.trim());
+      socket.emit('file-saved', data);
     })
     .catch(err => {
       socket.emit('file-error', err);
