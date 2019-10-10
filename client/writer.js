@@ -3,7 +3,7 @@ const URL = 'http://localhost:7890';
 const socket = io.connect(URL);
 const writeFileAsync = require('../lib/write-file-async');
 
-socket.on('save-file', ({ filenameToWrite, capitalizedContent }) => {
+socket.on('file-saved', ({ filenameToWrite, capitalizedContent }) => {
   writeFileAsync(filenameToWrite, capitalizedContent)
     .then(data => {
       socket.emit('file-saved', data);
