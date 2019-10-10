@@ -1,0 +1,37 @@
+{
+  "name": "fsjs-e2e-route-model-quiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "jest": "jest --runInBand",
+    "test": "npm run jest",
+    "test:coverage": "npm run test -- --coverage",
+    "test:watch": "npm run jest -- --watchAll",
+    "test:verbose": "npm run test -- --verbose",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^3.0.2",
+    "dotenv": "^8.1.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.2"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}
