@@ -22,6 +22,10 @@ reader
       .catch(err => {
         socket.emit('file-error', err);
       });
+    socket.on('done', message => {
+      console.log(message);
+      process.exit(0);
+    });
   });
 
 reader.parse(process.argv);

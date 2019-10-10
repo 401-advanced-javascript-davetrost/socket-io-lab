@@ -13,6 +13,8 @@ io.on('connection', socket => {
   });
   socket.on('file-saved', data => {
     io.emit('log', '[server]state=file-saved > received data: ' + data);
+    io.emit('done', data);
+    io.emit('log', 'done');
   });
   socket.on('file-error', error => {
     console.log(error);
