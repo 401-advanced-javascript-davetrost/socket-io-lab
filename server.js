@@ -1,18 +1,20 @@
 const io = require('socket.io')(7890);
+let filenameToWrite;
 
 io.on('connection', socket => {
-  socket.on('file-read', data => {
-    io.emit('log', '[server]state=file-read > received data: ' + data);
-    io.emit('capitalize-file', data);
+  socket.on('file-read', ({ filename, content }) => {
+    filenameToWrite = filename;
+    io.emit('log', '[server]state=file-read > received content from file: ' + filename);
+    io.emit('capitalize-file', content);
   });
-  socket.on('file-write', data => {
-    io.emit('log', '[server]state=file-write > received data: ' + data);
-    io.emit('save-file');
+  socket.on('file-write', capitalizedContent => {
+    io.emit('log', '[server]state=file-write > received data: ' + capitalizedContent);
+    io.emit('save-file', { filenameToWrite, capitalizedContent });
   });
   socket.on('file-saved', data => {
     io.emit('log', '[server]state=file-saved > received data: ' + data);
   });
   socket.on('file-error', error => {
-    console.log('Error: ' + error);
+    console.log(error);
   });
 });
